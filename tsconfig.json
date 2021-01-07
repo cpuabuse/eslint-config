@@ -1,0 +1,14 @@
+{
+	"compilerOptions": {
+		"esModuleInterop": true,
+		"module": "CommonJS",
+		"moduleResolution": "node",
+		"noImplicitAny": true,
+		"strict": true,
+		"target": "ES6",
+		"strictPropertyInitialization": true,
+		"newLine": "LF",
+		"forceConsistentCasingInFileNames": true
+	},
+	"include": ["src/**/*", "test/**/*", "data/**/*"]
+}
