@@ -35,7 +35,8 @@
 		"config:clean": "rimraf dist build",
 		"config:sort": "sort-package-json",
 		"deploy:release:dist": "mkdirp dist && ncp build/release dist/release",
-		"exec:test": "mocha build/test/test/test.js"
+		"exec:test": "mocha build/test/test/test.js",
+		"test": "npm run build:test && npm run exec:test"
 	},
 	"devDependencies": {
 		"@types/mocha": "^8.2.0",
