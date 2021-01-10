@@ -12,7 +12,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            console.log(await checks.listForRef({
+            console.log(await github.checks.listForRef({
               owner: ${{ github.repository_owner }},
               repo: ${{ github.repository }},
               ref: ${{ github.ref }},
