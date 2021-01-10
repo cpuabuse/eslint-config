@@ -12,11 +12,9 @@ jobs:
         with:
           github-token: ${{ github.token }}
           script: |
-            console.log("${{ github.repository_owner }}");
-            console.log("${{ github.repository }}");
-            console.log("${{ github.ref }}");
-            console.log(await github.checks.listForRef({
-              owner: "${{ github.repository_owner }}",
-              repo: "${{ github.repository }}",
-              ref: "${{ github.ref }}",
-            }))
+            github.pullRequests.createReview({
+              owner: context.payload.repository.owner.login,
+              repo: context.payload.repository.name,
+              pull_number: context.payload.pull_request.number,
+              event: 'APPROVE'
+            })
