@@ -1,4 +1,4 @@
-name: $(SourceBranchName)_$(BuildID)
+name: $(Build.DefinitionName)_$(SourceBranchName)_$(BuildID)
 
 resources:
   repositories:
