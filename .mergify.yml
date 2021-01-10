@@ -1,12 +1,14 @@
 pull_request_rules:
   - name: auto_merge
     conditions:
-      - author=dependabot
+      - base=main
+      - author=dependabot[bot]
       - label=dependencies
-      - "#conflict"
       - files=package.json
       - check-success=cpuabuse.eslint-config.test
       - check-success=Codacy Static Code Analysis
     actions:
       merge:
         method: merge
+      review:
+        type: APPROVE
