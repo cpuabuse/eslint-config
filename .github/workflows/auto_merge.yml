@@ -1,0 +1,19 @@
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: merge
+        uses: actions/github-script@v3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            console.log(await checks.listForRef({
+              owner: ${{ github.repository_owner }},
+              repo: ${{ github.repository }},
+              ref: ${{ github.ref }},
+            }))
