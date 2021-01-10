@@ -3,7 +3,6 @@ pull_request_rules:
     conditions:
       - base=main
       - author=dependabot[bot]
-      - label=dependencies
       - files=package.json
       - check-success=cpuabuse.eslint-config.test
       - check-success=Codacy Static Code Analysis
