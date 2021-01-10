@@ -1,4 +1,4 @@
 * @cpuabuse/admin
 /src @cpuabuse/member
 /test @cpuabuse/member
-package.json @cpuabuse/admin @cpuabuse/bot
+package.json @cpuabuse/admin @mergify
