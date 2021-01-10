@@ -6,6 +6,7 @@ pull_request_rules:
       - check-success=cpuabuse.eslint-config.test
       - check-success=Codacy Static Code Analysis
     actions:
-      review: {}
+      review:
+        bot_account: badelgatobot
       merge:
         strict: smart
