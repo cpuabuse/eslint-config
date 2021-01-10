@@ -12,6 +12,9 @@ jobs:
         with:
           github-token: ${{ github.token }}
           script: |
+            console.log("${{ github.repository_owner }}");
+            console.log("${{ github.repository }}");
+            console.log("${{ github.ref }}");
             console.log(await github.checks.listForRef({
               owner: "${{ github.repository_owner }}",
               repo: "${{ github.repository }}",
