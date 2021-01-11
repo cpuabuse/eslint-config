@@ -3,11 +3,11 @@ updates:
   - package-ecosystem: npm
     directory: "/"
     schedule:
-      interval: weekly
-      time: "09:00"
+      interval: daily
+      time: "08:00"
       timezone: Asia/Tokyo
     pull-request-branch-name:
       separator: "-"
+    target-branch: "maintain"
+    open-pull-requests-limit: 1
     versioning-strategy: increase
-    commit-message:
-      prefix: Change

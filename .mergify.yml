@@ -1,0 +1,7 @@
+pull_request_rules:
+  - name: auto_merge
+    conditions:
+      - "#base=main"
+    actions:
+      merge:
+        strict: smart
