@@ -10,9 +10,9 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             github.pulls.create({
-              owner: context.repo.repo,
-              repo: context.repo.owner,
-              title: "chore(maintain): automated maintenance"
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: "chore(maintain): automated maintenance",
               head: "maintain",
               base: "main",
               body: "# Description\n\nAutomated maintenance.",
