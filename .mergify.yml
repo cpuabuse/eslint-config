@@ -1,7 +1,12 @@
 pull_request_rules:
   - name: auto_merge
     conditions:
-      - base!=main
+      - base=maintain
     actions:
       merge:
         strict: smart
+  - name: auto_update
+    conditions:
+      - base=main
+    actions:
+      update: {}
