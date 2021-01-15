@@ -34,8 +34,9 @@
 		"build:test": "tsc --project tsconfig/test.tsconfig.json",
 		"config:clean": "rimraf dist build",
 		"config:sort": "sort-package-json",
-		"deploy:release:dist": "mkdirp dist && ncp build/release dist/release",
+		"dist:release": "mkdirp dist && ncp build/release dist/release",
 		"exec:test": "mocha build/test/test/test.js",
+		"build": "npm run build:release && npm run dist:release",
 		"test": "npm run build:test && npm run exec:test"
 	},
 	"devDependencies": {
