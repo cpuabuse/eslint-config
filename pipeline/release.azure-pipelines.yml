@@ -1,0 +1,12 @@
+name: $(Build.DefinitionName)_$(SourceBranchName)_$(BuildID)
+
+resources:
+  repositories:
+    - repository: pipelines
+      type: git
+      name: cpuabuse-public/pipelines
+
+extends:
+  template: dist/release/azure-pipelines/azure-pipelines.yml@pipelines
+  parameters:
+    pipeline: node-release
