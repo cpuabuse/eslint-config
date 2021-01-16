@@ -1,6 +1,6 @@
 {
 	"name": "@cpuabuse/eslint-config",
-	"version": "0.0.5",
+	"version": "0.0.6",
 	"description": "ESLint config for cpuabuse.com",
 	"keywords": [
 		"eslintconfig",
