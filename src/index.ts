@@ -58,7 +58,29 @@ export = {
 
 		// Require a consistent member declaration order
 		// Order what can be ordered
-		"@typescript-eslint/member-ordering": ["error", { default: { order: "alphabetically" } }],
+		"@typescript-eslint/member-ordering": [
+			"error",
+			{
+				default: {
+					memberTypes: [
+						"signature",
+						"public-field",
+						"protected-field",
+						"private-field",
+						"public-constructor",
+						"protected-constructor",
+						"private-constructor",
+						"public-static-method",
+						"protected-static-method",
+						"private-static-method",
+						"public-method",
+						"protected-method",
+						"private-method"
+					],
+					order: "alphabetically"
+				}
+			}
+		],
 
 		// Disallow generic Array constructors
 		// We want to use array constructor often
