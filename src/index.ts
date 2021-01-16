@@ -1,5 +1,5 @@
 /*
-	Copyright 2020 cpuabuse.com
+	Copyright 2021 cpuabuse.com
 	Licensed under the ISC License (https://opensource.org/licenses/ISC)
 */
 
@@ -123,6 +123,12 @@ export = {
 		// Managed by prettier
 		indent: "off",
 
+		// Ensures that parameter names in JSDoc match those in the function declaration
+		// Allow destructured to be ignored and be documented
+		"jsdoc/check-param-names": "off",
+
+		// Checks that all files have a @file
+		// For proper file descriptions
 		"jsdoc/require-file-overview": "error",
 
 		// Checks for presence of jsdoc comments, on class declarations as well as functions
@@ -148,6 +154,10 @@ export = {
 				}
 			}
 		],
+
+		// Requires that all function parameters are documented
+		// For not generating clutter with destructuring and rest
+		"jsdoc/require-param": ["error", { checkDestructuredRoots: false }],
 
 		// Requires that each @param tag has a type value
 		// Not necessary for TS
