@@ -20,4 +20,4 @@ jobs:
               base: "main",
               body: "# Description\n\nAutomated maintenance.",
               maintainer_can_modify: true
-            });
+            }).catch(() => {});
