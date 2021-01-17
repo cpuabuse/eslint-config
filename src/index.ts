@@ -1,5 +1,5 @@
 /*
-	Copyright 2020 cpuabuse.com
+	Copyright 2021 cpuabuse.com
 	Licensed under the ISC License (https://opensource.org/licenses/ISC)
 */
 
@@ -58,7 +58,29 @@ export = {
 
 		// Require a consistent member declaration order
 		// Order what can be ordered
-		"@typescript-eslint/member-ordering": ["error", { default: { order: "alphabetically" } }],
+		"@typescript-eslint/member-ordering": [
+			"error",
+			{
+				default: {
+					memberTypes: [
+						"signature",
+						"public-field",
+						"protected-field",
+						"private-field",
+						"public-constructor",
+						"protected-constructor",
+						"private-constructor",
+						"public-static-method",
+						"protected-static-method",
+						"private-static-method",
+						"public-method",
+						"protected-method",
+						"private-method"
+					],
+					order: "alphabetically"
+				}
+			}
+		],
 
 		// Disallow generic Array constructors
 		// We want to use array constructor often
@@ -123,6 +145,12 @@ export = {
 		// Managed by prettier
 		indent: "off",
 
+		// Ensures that parameter names in JSDoc match those in the function declaration
+		// Allow destructured to be ignored and be documented
+		"jsdoc/check-param-names": "off",
+
+		// Checks that all files have a @file
+		// For proper file descriptions
 		"jsdoc/require-file-overview": "error",
 
 		// Checks for presence of jsdoc comments, on class declarations as well as functions
@@ -148,6 +176,10 @@ export = {
 				}
 			}
 		],
+
+		// Requires that all function parameters are documented
+		// For not generating clutter with destructuring and rest
+		"jsdoc/require-param": ["error", { checkDestructuredRoots: false }],
 
 		// Requires that each @param tag has a type value
 		// Not necessary for TS
