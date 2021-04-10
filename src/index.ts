@@ -94,6 +94,16 @@ export = {
 		// We want the types to be forced
 		"@typescript-eslint/no-inferrable-types": "off",
 
+		// Requires type definitions to exist
+		// We want all types. Multiple options on by default
+		"@typescript-eslint/typedef": [
+			"error",
+			{
+				objectDestructuring: true,
+				variableDeclaration: true
+			}
+		],
+
 		// Require or disallow named function expressions
 		// Creates too much clutter
 		"func-names": "off",
