@@ -48,209 +48,225 @@ export = {
 	},
 	plugins: ["sort-keys-fix", "tsdoc", "header"],
 	rules: {
-		// Require explicit return types on functions and class methods
-		// We want all types
-		"@typescript-eslint/explicit-function-return-type": "error",
+		// Common rules
+		...{
+			// Require explicit return types on functions and class methods
+			// We want all types
+			"@typescript-eslint/explicit-function-return-type": "error",
 
-		// Require explicit accessibility modifiers on class properties and methods
-		// Makes it clear
-		"@typescript-eslint/explicit-member-accessibility": "error",
+			// Require explicit accessibility modifiers on class properties and methods
+			// Makes it clear
+			"@typescript-eslint/explicit-member-accessibility": "error",
 
-		// Require a consistent member declaration order
-		// Order what can be ordered
-		"@typescript-eslint/member-ordering": [
-			"error",
-			{
-				default: {
-					memberTypes: [
-						"signature",
-						"public-field",
-						"protected-field",
-						"private-field",
-						"public-constructor",
-						"protected-constructor",
-						"private-constructor",
-						"public-static-method",
-						"protected-static-method",
-						"private-static-method",
-						"public-method",
-						"protected-method",
-						"private-method"
+			// Require a consistent member declaration order
+			// Order what can be ordered
+			"@typescript-eslint/member-ordering": [
+				"error",
+				{
+					default: {
+						memberTypes: [
+							"signature",
+							"public-field",
+							"protected-field",
+							"private-field",
+							"public-constructor",
+							"protected-constructor",
+							"private-constructor",
+							"public-static-method",
+							"protected-static-method",
+							"private-static-method",
+							"public-method",
+							"protected-method",
+							"private-method"
+						],
+						order: "alphabetically"
+					}
+				}
+			],
+
+			// Disallow generic Array constructors
+			// We want to use array constructor often
+			"@typescript-eslint/no-array-constructor": "off",
+
+			// Disallow usage of the any type
+			// That is why any can only be explicit
+			"@typescript-eslint/no-explicit-any": "off",
+
+			// Disallows explicit type declarations for variables or parameters initialized to a number, string, or boolean
+			// We want the types to be forced
+			"@typescript-eslint/no-inferrable-types": "off",
+
+			// Requires type definitions to exist
+			// We want all types. Multiple options on by default
+			"@typescript-eslint/typedef": [
+				"error",
+				{
+					objectDestructuring: true,
+					variableDeclaration: true
+				}
+			],
+
+			// Require or disallow named function expressions
+			// Creates too much clutter
+			"func-names": "off",
+
+			// Ensure that files begin with given comment
+			// Properly add licenses
+			"header/header": [
+				"error",
+				"block",
+				[
+					"",
+					`	Copyright ${new Date().getFullYear()} cpuabuse.com`,
+					"	Licensed under the ISC License (https://opensource.org/licenses/ISC)",
+					""
+				]
+			],
+
+			// Ensure consistent use of file extension within the import path
+			// No extensions in typescript
+			"import/extensions": [
+				"error",
+				"always",
+				{
+					js: "never",
+					jsx: "never",
+					ts: "never",
+					tsx: "never"
+				}
+			],
+
+			// Ensures that there is no resolvable path back to this module via its dependencies
+			// Sometimes it is necessary to have circular dependencies
+			"import/no-cycle": "off",
+
+			// Enforce a convention in module import order
+			// Sort everything; Used since sort-imports autofixes only multiple members on a single line are automatically sorted
+			"import/order": [
+				"error",
+				{
+					alphabetize: { order: "asc" }
+				}
+			],
+
+			// When there is only a single export from a module, prefer using default export over named export
+			// To have persistent imports there is no need for arbitrary default imports as modules will grow
+			"import/prefer-default-export": "off",
+
+			// Enforce consistent indentation
+			// Managed by prettier
+			indent: "off",
+
+			// Ensures that parameter names in JSDoc match those in the function declaration
+			// Allow destructured to be ignored and be documented
+			"jsdoc/check-param-names": "off",
+
+			// Checks that all files have a @file
+			// For proper file descriptions
+			"jsdoc/require-file-overview": "error",
+
+			// Checks for presence of jsdoc comments, on class declarations as well as functions
+			// Rule mostly for autofix; Default doesn't include classes; FunctionDeclaration defaults to true; "TSDeclareFunction" context omitted
+			"jsdoc/require-jsdoc": [
+				"error",
+				{
+					contexts: [
+						"ClassProperty",
+						"TSPropertySignature", // For interfaces
+						"TSMethodSignature", // For interfaces
+						"TSTypeAliasDeclaration",
+						"TSEnumDeclaration",
+						"TSInterfaceDeclaration",
+						"Program > VariableDeclaration" // For global vars
 					],
-					order: "alphabetically"
+					require: {
+						ArrowFunctionExpression: true,
+						ClassDeclaration: true,
+						ClassExpression: true,
+						FunctionExpression: true,
+						MethodDefinition: true
+					}
 				}
-			}
-		],
+			],
 
-		// Disallow generic Array constructors
-		// We want to use array constructor often
-		"@typescript-eslint/no-array-constructor": "off",
+			// Requires that all function parameters are documented
+			// For not generating clutter with destructuring and rest
+			"jsdoc/require-param": ["error", { checkDestructuredRoots: false }],
 
-		// Disallow usage of the any type
-		// That is why any can only be explicit
-		"@typescript-eslint/no-explicit-any": "off",
+			// Requires that each @param tag has a type value
+			// Not necessary for TS
+			"jsdoc/require-param-type": "off",
 
-		// Disallows explicit type declarations for variables or parameters initialized to a number, string, or boolean
-		// We want the types to be forced
-		"@typescript-eslint/no-inferrable-types": "off",
+			// Requires that @returns tag has type value
+			// Not needed for TS
+			"jsdoc/require-returns-type": "off",
 
-		// Requires type definitions to exist
-		// We want all types. Multiple options on by default
-		"@typescript-eslint/typedef": [
-			"error",
-			{
-				objectDestructuring: true,
-				variableDeclaration: true
-			}
-		],
+			// A file may not contain more than the specified number of classes
+			// Let programmer decide
+			"max-classes-per-file": "off",
 
-		// Require or disallow named function expressions
-		// Creates too much clutter
-		"func-names": "off",
+			// Disallow Array constructors
+			// Let programmer decide
+			"no-array-constructor": "off",
 
-		// Ensure that files begin with given comment
-		// Properly add licenses
-		"header/header": [
-			"error",
-			"block",
-			[
-				"",
-				`	Copyright ${new Date().getFullYear()} cpuabuse.com`,
-				"	Licensed under the ISC License (https://opensource.org/licenses/ISC)",
-				""
-			]
-		],
+			// The use of bitwise operators in JavaScript is very rare and often & or | is simply a mistyped && or ||, which will lead to unexpected behavior
+			// Bitwise is essential
+			"no-bitwise": "off",
 
-		// Ensure consistent use of file extension within the import path
-		// No extensions in typescript
-		"import/extensions": [
-			"error",
-			"always",
-			{
-				js: "never",
-				jsx: "never",
-				ts: "never",
-				tsx: "never"
-			}
-		],
-
-		// Ensures that there is no resolvable path back to this module via its dependencies
-		// Sometimes it is necessary to have circular dependencies
-		"import/no-cycle": "off",
-
-		// Enforce a convention in module import order
-		// Sort everything; Used since sort-imports autofixes only multiple members on a single line are automatically sorted
-		"import/order": [
-			"error",
-			{
-				alphabetize: { order: "asc" }
-			}
-		],
-
-		// When there is only a single export from a module, prefer using default export over named export
-		// To have persistent imports there is no need for arbitrary default imports as modules will grow
-		"import/prefer-default-export": "off",
-
-		// Enforce consistent indentation
-		// Managed by prettier
-		indent: "off",
-
-		// Ensures that parameter names in JSDoc match those in the function declaration
-		// Allow destructured to be ignored and be documented
-		"jsdoc/check-param-names": "off",
-
-		// Checks that all files have a @file
-		// For proper file descriptions
-		"jsdoc/require-file-overview": "error",
-
-		// Checks for presence of jsdoc comments, on class declarations as well as functions
-		// Rule mostly for autofix; Default doesn't include classes; FunctionDeclaration defaults to true; "TSDeclareFunction" context omitted
-		"jsdoc/require-jsdoc": [
-			"error",
-			{
-				contexts: [
-					"ClassProperty",
-					"TSPropertySignature", // For interfaces
-					"TSMethodSignature", // For interfaces
-					"TSTypeAliasDeclaration",
-					"TSEnumDeclaration",
-					"TSInterfaceDeclaration",
-					"Program > VariableDeclaration" // For global vars
-				],
-				require: {
-					ArrowFunctionExpression: true,
-					ClassDeclaration: true,
-					ClassExpression: true,
-					FunctionExpression: true,
-					MethodDefinition: true
+			// Disallow Magic Numbers
+			// We should use consts
+			"no-magic-numbers": [
+				"error",
+				{
+					ignore: [0, 1, -1]
 				}
+			],
+
+			// Disallow Object constructors
+			// Let programmer decide
+			"no-new-object": "off",
+
+			// Disallow Reassignment of Function Parameters
+			// Too annoying for class references
+			"no-param-reassign": ["error", { props: false }],
+
+			// Disallow the unary operators ++ and --
+			// Always
+			"no-plusplus": "off",
+
+			// Disallow Early Use
+			// There is hoisting
+			"no-use-before-define": "off",
+
+			// Suggest using const
+			// Let programmer decide
+			"prefer-const": "off",
+
+			// Import Sorting
+			// Does only what it can autofix, rest is handled by import/order
+			"sort-imports": ["error", { ignoreDeclarationSort: true }],
+
+			// Require object keys to be sorted
+			// Sort everything
+			"sort-keys-fix/sort-keys-fix": "error",
+
+			// A rule for validating that TypeScript doc comments conform to the TSDoc specification
+			// Need proper docs
+			"tsdoc/syntax": "error"
+		},
+		// Enum fix, removes errors shown with default ESLint for enums
+		...{
+			// Disallow variable declarations from shadowing variables declared in the outer scope
+			...{
+				"@typescript-eslint/no-shadow": "error",
+				"no-shadow": "off"
+			},
+			// Disallow unused variables
+			...{
+				"@typescript-eslint/no-unused-vars": "error",
+				"no-unused-vars": "off"
 			}
-		],
-
-		// Requires that all function parameters are documented
-		// For not generating clutter with destructuring and rest
-		"jsdoc/require-param": ["error", { checkDestructuredRoots: false }],
-
-		// Requires that each @param tag has a type value
-		// Not necessary for TS
-		"jsdoc/require-param-type": "off",
-
-		// Requires that @returns tag has type value
-		// Not needed for TS
-		"jsdoc/require-returns-type": "off",
-
-		// A file may not contain more than the specified number of classes
-		// Let programmer decide
-		"max-classes-per-file": "off",
-
-		// Disallow Array constructors
-		// Let programmer decide
-		"no-array-constructor": "off",
-
-		// The use of bitwise operators in JavaScript is very rare and often & or | is simply a mistyped && or ||, which will lead to unexpected behavior
-		// Bitwise is essential
-		"no-bitwise": "off",
-
-		// Disallow Magic Numbers
-		// We should use consts
-		"no-magic-numbers": [
-			"error",
-			{
-				ignore: [0, 1, -1]
-			}
-		],
-
-		// Disallow Object constructors
-		// Let programmer decide
-		"no-new-object": "off",
-
-		// Disallow Reassignment of Function Parameters
-		// Too annoying for class references
-		"no-param-reassign": ["error", { props: false }],
-
-		// Disallow the unary operators ++ and --
-		// Always
-		"no-plusplus": "off",
-
-		// Disallow Early Use
-		// There is hoisting
-		"no-use-before-define": "off",
-
-		// Suggest using const
-		// Let programmer decide
-		"prefer-const": "off",
-
-		// Import Sorting
-		// Does only what it can autofix, rest is handled by import/order
-		"sort-imports": ["error", { ignoreDeclarationSort: true }],
-
-		// Require object keys to be sorted
-		// Sort everything
-		"sort-keys-fix/sort-keys-fix": "error",
-
-		// A rule for validating that TypeScript doc comments conform to the TSDoc specification
-		// Need proper docs
-		"tsdoc/syntax": "error"
+		}
 	},
 	settings: {
 		"import/resolver": {
