@@ -97,12 +97,15 @@ export = {
 			"@typescript-eslint/no-inferrable-types": "off",
 
 			// Requires type definitions to exist
-			// We want all types. Multiple options on by default
+			// We want all types. Seems many options off by default now
 			"@typescript-eslint/typedef": [
 				"error",
 				{
+					arrayDestructuring: true,
+					memberVariableDeclaration: true,
 					objectDestructuring: true,
-					variableDeclaration: true
+					parameter: true,
+					propertyDeclaration: true
 				}
 			],
 
