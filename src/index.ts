@@ -58,6 +58,10 @@ export = {
 			// Makes it clear
 			"@typescript-eslint/explicit-member-accessibility": "error",
 
+			// Require explicit return and argument types on exported functions' and classes' public class methods
+			// Redundant as everything should already be typed
+			"@typescript-eslint/explicit-module-boundary-types": "off",
+
 			// Require a consistent member declaration order
 			// Order what can be ordered
 			"@typescript-eslint/member-ordering": [
@@ -105,7 +109,8 @@ export = {
 					memberVariableDeclaration: true,
 					objectDestructuring: true,
 					parameter: true,
-					propertyDeclaration: true
+					propertyDeclaration: true,
+					variableDeclaration: true
 				}
 			],
 
