@@ -304,6 +304,10 @@ export = {
 			// Indentation governed by prettier
 			"vue/html-indent": "off",
 
+			// Enforce order of properties in components
+			// Property ordering governed by prettier
+			"vue/order-in-components": "off",
+
 			// Require a line break before and after the contents of a singleline element
 			// Newlines governed by prettier
 			"vue/singleline-html-element-content-newline": "off"
