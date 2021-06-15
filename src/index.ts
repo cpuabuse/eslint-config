@@ -304,6 +304,10 @@ export = {
 			// Indentation governed by prettier
 			"vue/html-indent": "off",
 
+			// Enforce the maximum number of attributes per line
+			// Newlines governed by prettier
+			"vue/max-attributes-per-line": "off",
+
 			// Enforce order of properties in components
 			// Property ordering governed by prettier
 			"vue/order-in-components": "off",
