@@ -2,7 +2,6 @@
 	"cSpell.words": ["cpuabuse", "eslintconfig", "styleguide", "deps"],
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
 	"editor.insertSpaces": false,
-	"eslint.probe": ["typescript"],
 	"files.associations": {
 		"*.azure-pipelines.yml": "azure-pipelines",
 		"*.tsconfig.json": "jsonc"
@@ -13,5 +12,6 @@
 			"fileMatch": ["*.tsconfig.json"],
 			"url": "https://json.schemastore.org/tsconfig"
 		}
-	]
+	],
+	"eslint.probe": ["typescript", "html", "vue"]
 }

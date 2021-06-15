@@ -36,13 +36,28 @@ export = {
 		"plugin:jsdoc/recommended", // Loads JSDoc plugin
 		"plugin:mocha/recommended", // Loads mocha plugin
 		"airbnb-base",
-		"plugin:prettier/recommended" // Loads prettier plugin
+		"plugin:prettier/recommended", // Loads prettier plugin
+		"plugin:vue/vue3-recommended"
 	],
-	parser: "@typescript-eslint/parser",
+	overrides: [
+		// Vue overrides
+		{
+			files: ["*.vue"],
+			rules: {
+				// Cannot work on file level https://github.com/Stuk/eslint-plugin-header/issues/8
+				"header/header": "off",
+				// Cannot work on file level
+				"jsdoc/require-file-overview": "off"
+			}
+		}
+	],
+	parser: "vue-eslint-parser",
 	parserOptions: {
 		ecmaFeatures: {
 			impliedStrict: true
 		},
+		extraFileExtensions: [".vue"],
+		parser: "@typescript-eslint/parser",
 		project: "./tsconfig.json",
 		sourceType: "module"
 	},
@@ -148,10 +163,6 @@ export = {
 				}
 			],
 
-			// Disallow duplicate name in class members
-			// Not necessary in TS, since overload
-			"no-dupe-class-members": "off",
-
 			// Ensures that there is no resolvable path back to this module via its dependencies
 			// Sometimes it is necessary to have circular dependencies
 			"import/no-cycle": "off",
@@ -229,6 +240,10 @@ export = {
 			// Bitwise is essential
 			"no-bitwise": "off",
 
+			// Disallow duplicate name in class members
+			// Not necessary in TS, since overload
+			"no-dupe-class-members": "off",
+
 			// Disallow Magic Numbers
 			// We should use consts
 			"no-magic-numbers": [
@@ -282,6 +297,16 @@ export = {
 				"@typescript-eslint/no-unused-vars": "error",
 				"no-unused-vars": "off"
 			}
+		},
+		// Vue fixes
+		...{
+			// Enforce consistent indentation
+			// Indentation governed by prettier
+			"vue/html-indent": "off",
+
+			// Require a line break before and after the contents of a singleline element
+			// Newlines governed by prettier
+			"vue/singleline-html-element-content-newline": "off"
 		}
 	},
 	settings: {
