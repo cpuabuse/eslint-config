@@ -92,6 +92,10 @@ export = {
 			// We want to use array constructor often
 			"@typescript-eslint/no-array-constructor": "off",
 
+			// Disallow duplicate class members
+			// Fixes no-dupe-class-members
+			"@typescript-eslint/no-dupe-class-members": ["error"],
+
 			// Disallow usage of the any type
 			// That is why any can only be explicit
 			"@typescript-eslint/no-explicit-any": "off",
@@ -143,6 +147,10 @@ export = {
 					tsx: "never"
 				}
 			],
+
+			// Disallow duplicate name in class members
+			// Not necessary in TS, since overload
+			"no-dupe-class-members": "off",
 
 			// Ensures that there is no resolvable path back to this module via its dependencies
 			// Sometimes it is necessary to have circular dependencies
