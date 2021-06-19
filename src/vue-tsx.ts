@@ -4,7 +4,7 @@
 */
 
 /**
- * @file ESLint config
+ * @file ESLint config for Vue with TSX
  */
 
 /**
@@ -19,30 +19,24 @@
  */
 
 import { Linter } from "eslint";
+import { baseRules, secondaryExtends, secondarySettings, vueExtends, vueRules } from "./lib/partial";
 
 /**
- * Default config.
+ * ESLint config for Vue.
  */
-const defaultConfig: Linter.Config = {
-	overrides: [
-		// TS
-		{
-			excludedFiles: ["**/*.vue"],
-			extends: ["./typescript.js"],
-			files: ["*"]
+const vueTsxConfig: Linter.Config = {
+	extends: ["./base.js", ...vueExtends, ...secondaryExtends],
+	parser: "vue-eslint-parser",
+	// The project and typed rules are not present - https://github.com/typescript-eslint/typescript-eslint/issues/566
+	parserOptions: {
+		ecmaFeatures: {
+			jsx: true
 		},
-		// Vue
-		{
-			excludedFiles: ["**/tsx/**/*.vue", "**/*.tsx.vue", "**/tsx.*.vue"],
-			extends: ["./vue.js"],
-			files: ["**/*.vue"]
-		},
-		// Vue tsx
-		{
-			extends: ["./vue-tsx.js"],
-			files: ["**/tsx/**/*.vue", "**/*.tsx.vue", "**/tsx.*.vue"]
-		}
-	]
+		extraFileExtensions: [".vue"],
+		parser: "@typescript-eslint/parser"
+	},
+	rules: { ...baseRules, ...vueRules },
+	settings: secondarySettings
 };
 
-export = defaultConfig;
+export = vueTsxConfig;

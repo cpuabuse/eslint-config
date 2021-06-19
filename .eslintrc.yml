@@ -1,1 +1,1 @@
-extends: ./dist/release/index.js
+extends: ./build/release/index.js

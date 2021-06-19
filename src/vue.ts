@@ -4,7 +4,7 @@
 */
 
 /**
- * @file ESLint config
+ * @file ESLint config for Vue
  */
 
 /**
@@ -19,30 +19,21 @@
  */
 
 import { Linter } from "eslint";
+import { baseRules, secondaryExtends, secondarySettings, typeExtends, vueExtends, vueRules } from "./lib/partial";
 
 /**
- * Default config.
+ * ESLint config for Vue.
  */
-const defaultConfig: Linter.Config = {
-	overrides: [
-		// TS
-		{
-			excludedFiles: ["**/*.vue"],
-			extends: ["./typescript.js"],
-			files: ["*"]
-		},
-		// Vue
-		{
-			excludedFiles: ["**/tsx/**/*.vue", "**/*.tsx.vue", "**/tsx.*.vue"],
-			extends: ["./vue.js"],
-			files: ["**/*.vue"]
-		},
-		// Vue tsx
-		{
-			extends: ["./vue-tsx.js"],
-			files: ["**/tsx/**/*.vue", "**/*.tsx.vue", "**/tsx.*.vue"]
-		}
-	]
+const vueConfig: Linter.Config = {
+	extends: ["./base.js", ...typeExtends, ...vueExtends, ...secondaryExtends],
+	parser: "vue-eslint-parser",
+	parserOptions: {
+		extraFileExtensions: [".vue"],
+		parser: "@typescript-eslint/parser",
+		project: "./tsconfig.json"
+	},
+	rules: { ...baseRules, ...vueRules },
+	settings: secondarySettings
 };
 
-export = defaultConfig;
+export = vueConfig;
