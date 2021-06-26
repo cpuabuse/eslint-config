@@ -295,6 +295,10 @@ export const vueRules: Partial<Linter.RulesRecord> = {
 	// Indentation governed by prettier
 	"vue/html-indent": "off",
 
+	// Enforce self-closing style
+	// Prettier controls it
+	"vue/html-self-closing": "off",
+
 	// Enforce the maximum number of attributes per line
 	// Newlines governed by prettier
 	"vue/max-attributes-per-line": "off",
