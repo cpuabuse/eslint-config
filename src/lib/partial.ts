@@ -291,6 +291,10 @@ export const vueRules: Partial<Linter.RulesRecord> = {
 	// Cannot work on file level
 	"jsdoc/require-file-overview": "off",
 
+	// Require or disallow a line break before tag's closing brackets
+	// Controlled by prettier
+	"vue/html-closing-bracket-newline": "off",
+
 	// Enforce consistent indentation
 	// Indentation governed by prettier
 	"vue/html-indent": "off",
