@@ -209,6 +209,10 @@ export const baseRules: Partial<Linter.RulesRecord> = {
 		// Not needed for TS
 		"jsdoc/require-returns-type": "off",
 
+		// Requires all types to be valid JSDoc, Closure, or TypeScript compiler types without syntax errors
+		// Cannot be applied to TSDoc
+		"jsdoc/valid-types": "off",
+
 		// A file may not contain more than the specified number of classes
 		// Let programmer decide
 		"max-classes-per-file": "off",
