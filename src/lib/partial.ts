@@ -169,6 +169,10 @@ export const baseRules: Partial<Linter.RulesRecord> = {
 		// Allow destructured to be ignored and be documented
 		"jsdoc/check-param-names": "off",
 
+		// Reports invalid block tag names.
+		// Do not need to replace TSDoc comments
+		"jsdoc/check-tag-names": "off",
+
 		// Checks that all files have a @file
 		// For proper file descriptions
 		"jsdoc/require-file-overview": "error",
