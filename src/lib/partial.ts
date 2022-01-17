@@ -10,6 +10,16 @@
 import { Linter } from "eslint";
 
 /**
+ * Regular expression for long comments.
+ */
+const regexLongComment: string = "^(([A-Z`\\d_].*[.]\\n*)|((```)(.|\\n)*(```))\\n*)*$";
+
+/**
+ * Regular expression for short comments.
+ */
+const regexShortComment: string = "^([A-Z`\\d_].*)[^,.]$";
+
+/**
  * Goes to top of `extends` list.
  */
 export const primaryExtends: Array<string> = [
@@ -172,6 +182,23 @@ export const baseRules: Partial<Linter.RulesRecord> = {
 		// Reports invalid block tag names.
 		// Do not need to replace TSDoc comments
 		"jsdoc/check-tag-names": "off",
+
+		// Enforces a regular expression pattern on descriptions
+		// Make sure the descriptions and tags are valid
+		"jsdoc/match-description": [
+			"error",
+			{
+				contexts: ["any"],
+				matchDescription: regexLongComment,
+				tags: {
+					example: { match: true },
+					param: { match: regexShortComment },
+					remarks: { match: true },
+					returns: { match: regexShortComment },
+					see: { match: regexShortComment }
+				}
+			}
+		],
 
 		// Checks that all files have a @file
 		// For proper file descriptions
@@ -338,7 +365,7 @@ export const secondarySettings: Linter.Config["settings"] = {
 };
 
 /**
- * Common rules, for any config consuming secondary "extends".
+ *
  */
 export const secondaryRules: Partial<Linter.RulesRecord> = {
 	// Require default case in switch statements

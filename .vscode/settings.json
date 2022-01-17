@@ -1,5 +1,5 @@
 {
-	"cSpell.words": ["cpuabuse", "eslintconfig", "styleguide", "deps"],
+	"cSpell.words": ["cpuabuse", "eslintconfig", "styleguide", "deps", "autofix"],
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
 	"editor.insertSpaces": false,
 	"files.associations": {
