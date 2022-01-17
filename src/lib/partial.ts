@@ -10,6 +10,20 @@
 import { Linter } from "eslint";
 
 /**
+ * Asts to use for documentation.
+ */
+const DocAstContext: Array<string> = [
+	"ClassProperty",
+	"TSPropertySignature", // For interfaces
+	"TSMethodSignature", // For interfaces
+	"TSTypeAliasDeclaration",
+	"TSEnumDeclaration",
+	"TSInterfaceDeclaration",
+	"Program > VariableDeclaration", // Non-exported top-level variables
+	"ExportNamedDeclaration" // Exports
+];
+
+/**
  * Regular expression for long comments.
  */
 const regexLongComment: string = "^(([A-Z`\\d_].*[.]\\n*)|((```)(.|\\n)*(```))\\n*)*$";
@@ -200,6 +214,15 @@ export const baseRules: Partial<Linter.RulesRecord> = {
 			}
 		],
 
+		// Requires that all functions have a description
+		// Not included into default
+		"jsdoc/require-description": [
+			"error",
+			{
+				contexts: DocAstContext
+			}
+		],
+
 		// Checks that all files have a @file
 		// For proper file descriptions
 		"jsdoc/require-file-overview": "error",
@@ -210,16 +233,7 @@ export const baseRules: Partial<Linter.RulesRecord> = {
 			"error",
 			{
 				// FunctionDeclaration defaults to `true`
-				contexts: [
-					"ClassProperty",
-					"TSPropertySignature", // For interfaces
-					"TSMethodSignature", // For interfaces
-					"TSTypeAliasDeclaration",
-					"TSEnumDeclaration",
-					"TSInterfaceDeclaration",
-					"Program > VariableDeclaration", // Non-exported top-level variables
-					"ExportNamedDeclaration" // Exports
-				],
+				contexts: DocAstContext,
 				require: {
 					ArrowFunctionExpression: true,
 					ClassDeclaration: true,
@@ -354,7 +368,7 @@ export const vueRules: Partial<Linter.RulesRecord> = {
 };
 
 /**
- * Common settings, for any config consuming secondary "extends".
+ * Common settings for any config consuming secondary "extends".
  */
 export const secondarySettings: Linter.Config["settings"] = {
 	"import/resolver": {
@@ -365,7 +379,7 @@ export const secondarySettings: Linter.Config["settings"] = {
 };
 
 /**
- *
+ * Common rules for any config consuming secondary "extends".
  */
 export const secondaryRules: Partial<Linter.RulesRecord> = {
 	// Require default case in switch statements
