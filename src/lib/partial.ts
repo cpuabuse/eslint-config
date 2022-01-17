@@ -3,11 +3,11 @@
 	Licensed under the ISC License (https://opensource.org/licenses/ISC)
 */
 
-import { Linter } from "eslint";
-
 /**
  * @file Reusable config bits
  */
+
+import { Linter } from "eslint";
 
 /**
  * Goes to top of `extends` list.
@@ -182,6 +182,7 @@ export const baseRules: Partial<Linter.RulesRecord> = {
 		"jsdoc/require-jsdoc": [
 			"error",
 			{
+				// FunctionDeclaration defaults to `true`
 				contexts: [
 					"ClassProperty",
 					"TSPropertySignature", // For interfaces
@@ -189,7 +190,8 @@ export const baseRules: Partial<Linter.RulesRecord> = {
 					"TSTypeAliasDeclaration",
 					"TSEnumDeclaration",
 					"TSInterfaceDeclaration",
-					"Program > VariableDeclaration" // For global vars
+					"Program > VariableDeclaration", // Non-exported top-level variables
+					"ExportNamedDeclaration" // Exports
 				],
 				require: {
 					ArrowFunctionExpression: true,
