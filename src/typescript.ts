@@ -1,5 +1,5 @@
 /*
-	Copyright 2021 cpuabuse.com
+	Copyright 2022 cpuabuse.com
 	Licensed under the ISC License (https://opensource.org/licenses/ISC)
 */
 
@@ -19,7 +19,7 @@
  */
 
 import { Linter } from "eslint";
-import { baseRules, secondaryExtends, secondarySettings, typeExtends } from "./lib/partial";
+import { baseRules, secondaryExtends, secondaryRules, secondarySettings, typeExtends } from "./lib/partial";
 
 /**
  * ESLint config for TS.
@@ -30,7 +30,7 @@ const typescriptConfig: Linter.Config = {
 	parserOptions: {
 		project: "./tsconfig.json"
 	},
-	rules: baseRules,
+	rules: { ...baseRules, ...secondaryRules },
 	settings: secondarySettings
 };
 

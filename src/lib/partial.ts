@@ -1,5 +1,5 @@
 /*
-	Copyright 2021 cpuabuse.com
+	Copyright 2022 cpuabuse.com
 	Licensed under the ISC License (https://opensource.org/licenses/ISC)
 */
 
@@ -333,4 +333,13 @@ export const secondarySettings: Linter.Config["settings"] = {
 			extensions: [".js", ".jsx", ".ts", ".tsx"]
 		}
 	}
+};
+
+/**
+ * Common rules, for any config consuming secondary "extends".
+ */
+export const secondaryRules: Partial<Linter.RulesRecord> = {
+	// Require default case in switch statements
+	// Reverting Airbnb comment pattern to ESLint default
+	"default-case": ["error", { commentPattern: "^[Nn]o default$" }]
 };

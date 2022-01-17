@@ -1,5 +1,5 @@
 /*
-	Copyright 2021 cpuabuse.com
+	Copyright 2022 cpuabuse.com
 	Licensed under the ISC License (https://opensource.org/licenses/ISC)
 */
 
@@ -19,7 +19,7 @@
  */
 
 import { Linter } from "eslint";
-import { baseRules, secondaryExtends, secondarySettings, vueExtends, vueRules } from "./lib/partial";
+import { baseRules, secondaryExtends, secondaryRules, secondarySettings, vueExtends, vueRules } from "./lib/partial";
 
 /**
  * ESLint config for Vue.
@@ -35,7 +35,7 @@ const vueTsxConfig: Linter.Config = {
 		extraFileExtensions: [".vue"],
 		parser: "@typescript-eslint/parser"
 	},
-	rules: { ...baseRules, ...vueRules },
+	rules: { ...baseRules, ...vueRules, ...secondaryRules },
 	settings: secondarySettings
 };
 
