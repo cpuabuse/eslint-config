@@ -26,12 +26,12 @@ const DocAstContext: Array<string> = [
 /**
  * Regular expression for long comments.
  */
-const regexLongComment: string = "^(([A-Z`\\d_].*[.]\\n*)|((```)(.|\\n)*(```))\\n*)*$";
+const regexLongComment: string = "^(([A-Z`{\\d_].*[.]\\n*)|((```)(.|\\n)*(```))\\n*)*$";
 
 /**
  * Regular expression for short comments.
  */
-const regexShortComment: string = "^([A-Z`\\d_].*)[^,.]$";
+const regexShortComment: string = "^([A-Z`{\\d_].*)[^,.]$";
 
 /**
  * Goes to top of `extends` list.
