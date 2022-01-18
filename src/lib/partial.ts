@@ -207,7 +207,6 @@ export const baseRules: Partial<Linter.RulesRecord> = {
 				tags: {
 					example: { match: true },
 					param: { match: regexShortComment },
-					remarks: { match: true },
 					returns: { match: regexShortComment },
 					see: { match: regexShortComment }
 				}
