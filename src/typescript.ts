@@ -19,7 +19,7 @@
  */
 
 import { Linter } from "eslint";
-import { baseRules, secondaryExtends, secondaryRules, secondarySettings, typeExtends } from "./lib/partial";
+import { baseRules, secondaryExtends, secondaryRules, secondarySettings, typeExtends } from "./lib";
 
 /**
  * ESLint config for TS.

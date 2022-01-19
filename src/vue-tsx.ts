@@ -19,7 +19,7 @@
  */
 
 import { Linter } from "eslint";
-import { baseRules, secondaryExtends, secondaryRules, secondarySettings, vueExtends, vueRules } from "./lib/partial";
+import { baseRules, secondaryExtends, secondaryRules, secondarySettings, vueExtends, vueRules } from "./lib";
 
 /**
  * ESLint config for Vue.

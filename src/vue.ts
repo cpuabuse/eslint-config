@@ -27,7 +27,7 @@ import {
 	typeExtends,
 	vueExtends,
 	vueRules
-} from "./lib/partial";
+} from "./lib";
 
 /**
  * ESLint config for Vue.

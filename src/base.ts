@@ -8,7 +8,7 @@
  */
 
 import type { Linter } from "eslint";
-import { primaryExtends } from "./lib/partial";
+import { primaryExtends } from "./lib";
 
 /**
  * Base config.

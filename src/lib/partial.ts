@@ -8,6 +8,7 @@
  */
 
 import { Linter } from "eslint";
+import { blockFirstLineTagRegex, blockTagRegex, firstLineTagRegex } from ".";
 
 /**
  * Asts to use for documentation.
@@ -22,16 +23,6 @@ const DocAstContext: Array<string> = [
 	"Program > VariableDeclaration", // Non-exported top-level variables
 	"ExportNamedDeclaration" // Exports
 ];
-
-/**
- * Regular expression for long comments.
- */
-const regexLongComment: string = "^(([A-Z`{\\d_].*[.]\\n*)|((```)(.|\\n)*(```))\\n*)*$";
-
-/**
- * Regular expression for short comments.
- */
-const regexShortComment: string = "^([A-Z`{\\d_].*)[^,.]$";
 
 /**
  * Goes to top of `extends` list.
@@ -203,12 +194,14 @@ export const baseRules: Partial<Linter.RulesRecord> = {
 			"error",
 			{
 				contexts: ["any"],
-				matchDescription: regexLongComment,
+				matchDescription: blockTagRegex,
 				tags: {
-					example: { match: true },
-					param: { match: regexShortComment },
-					returns: { match: regexShortComment },
-					see: { match: regexShortComment }
+					example: { match: blockFirstLineTagRegex },
+					param: { match: firstLineTagRegex },
+					remarks: { match: true },
+					returns: { match: firstLineTagRegex },
+					see: { match: firstLineTagRegex },
+					throws: { match: blockFirstLineTagRegex }
 				}
 			}
 		],
