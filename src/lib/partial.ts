@@ -237,8 +237,11 @@ export const baseRules: Partial<Linter.RulesRecord> = {
 		],
 
 		// Requires that all function parameters are documented
-		// For not generating clutter with destructuring and rest
-		"jsdoc/require-param": ["error", { checkDestructuredRoots: false }],
+		// Generating only for destructured root, to give it a name in typedoc; Currently produces false positive for following root params, if first is documented
+		"jsdoc/require-param": [
+			"error",
+			{ autoIncrementBase: 2, checkDestructured: false, unnamedRootBase: ["param", "param"] }
+		],
 
 		// Requires that each @param tag has a type value
 		// Not necessary for TS
@@ -247,6 +250,22 @@ export const baseRules: Partial<Linter.RulesRecord> = {
 		// Requires that @returns tag has type value
 		// Not needed for TS
 		"jsdoc/require-returns-type": "off",
+
+		// Enforces lines (or no lines) between tags
+		// Default behavior removes desired lines
+		"jsdoc/tag-lines": [
+			"error",
+			"never",
+			{
+				noEndLines: true,
+				tags: {
+					example: { lines: "always" }, // Block tag
+					remarks: { lines: "always" }, // Block tag
+					returns: { lines: "always" }, // Last common tag
+					throws: { lines: "always" } // Block tag
+				}
+			}
+		],
 
 		// Requires all types to be valid JSDoc, Closure, or TypeScript compiler types without syntax errors
 		// Cannot be applied to TSDoc
