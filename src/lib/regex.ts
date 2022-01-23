@@ -10,7 +10,7 @@
 /**
  * Characters in the middle of English sentence, with characters needed for inline tags, that are not used for Markdown.
  */
-const englishMiddleCharacters: string = 'A-Za-z \\d`{@#.:}",\\-;';
+const englishMiddleCharacters: string = "A-Za-z \\d`{@#.:}\"',\\-;";
 
 /**
  * Sentence following a tag immediately.
