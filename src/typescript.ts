@@ -4,7 +4,9 @@
 */
 
 /**
- * @file ESLint config
+ * ESLint config.
+ *
+ * @module
  */
 
 /**

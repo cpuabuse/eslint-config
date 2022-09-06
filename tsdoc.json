@@ -6,7 +6,7 @@
 			"syntaxKind": "block"
 		},
 		{
-			"tagName": "@file",
+			"tagName": "@module",
 			"syntaxKind": "modifier"
 		}
 	]

@@ -4,7 +4,9 @@
 */
 
 /**
- * @file Non-configuration files.
+ * Non-configuration files.
+ *
+ * @module lib
  */
 
 export * from "./regex";

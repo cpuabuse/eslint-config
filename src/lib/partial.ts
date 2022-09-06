@@ -4,7 +4,9 @@
 */
 
 /**
- * @file Reusable config bits
+ * Reusable config bits.
+ *
+ * @module lib
  */
 
 import { Linter } from "eslint";
@@ -57,6 +59,8 @@ export const vueExtends: Array<string> = ["plugin:vue/vue3-recommended"];
 
 /**
  * Rules that go everywhere. It includes rules from typescript typechecking as well, since it is difficult to distinguish origin.
+ *
+ * @see {@link DocAstContext}
  */
 export const baseRules: Partial<Linter.RulesRecord> = {
 	// Common rules

@@ -4,7 +4,9 @@
 */
 
 /**
- * @file Regex bits
+ * Regex bits.
+ *
+ * @module lib
  */
 
 /**

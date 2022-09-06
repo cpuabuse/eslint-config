@@ -4,7 +4,9 @@
 */
 
 /**
- * @file ESLint config for Vue
+ * ESLint config for Vue.
+ *
+ * @module
  */
 
 /**
