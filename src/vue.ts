@@ -6,7 +6,8 @@
 /**
  * ESLint config for Vue.
  *
- * @module
+ * @file
+ * @packageDocumentation
  */
 
 /**

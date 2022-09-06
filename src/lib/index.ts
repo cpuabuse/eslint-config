@@ -6,6 +6,7 @@
 /**
  * Non-configuration files.
  *
+ * @file
  * @module lib
  */
 

@@ -6,6 +6,7 @@
 /**
  * Regex bits.
  *
+ * @file
  * @module lib
  */
 

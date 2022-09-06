@@ -6,6 +6,7 @@
 /**
  * Reusable config bits.
  *
+ * @file
  * @module lib
  */
 

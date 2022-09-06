@@ -6,7 +6,8 @@
 /**
  * ESLint base config, not really to be used directly.
  *
- * @module
+ * @file
+ * @packageDocumentation
  */
 
 import type { Linter } from "eslint";
@@ -30,8 +31,7 @@ const baseConfig: Linter.Config = {
 		},
 		sourceType: "module"
 	},
-	plugins: ["sort-keys-fix", "tsdoc", "header"],
-	settings: { jsdoc: { tagNamePreference: { file: "module" } } }
+	plugins: ["sort-keys-fix", "tsdoc", "header"]
 };
 
 /**

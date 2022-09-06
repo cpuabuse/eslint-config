@@ -6,7 +6,8 @@
 /**
  * ESLint config.
  *
- * @module
+ * @file
+ * @packageDocumentation
  */
 
 /**

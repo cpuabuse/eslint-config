@@ -6,7 +6,8 @@
 /**
  * ESLint config for Vue with TSX.
  *
- * @module
+ * @file
+ * @packageDocumentation
  */
 
 /**
