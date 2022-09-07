@@ -4,7 +4,7 @@
 */
 
 /**
- * ESLint config.
+ * ESLint config for TS.
  *
  * @file
  * @packageDocumentation

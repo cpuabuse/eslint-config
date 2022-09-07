@@ -10,7 +10,8 @@
 		"typescript",
 		"airbnb",
 		"prettier",
-		"es2021"
+		"es2021",
+		"tsdoc"
 	],
 	"homepage": "https://github.com/cpuabuse/eslint-config#readme",
 	"bugs": {
@@ -20,21 +21,54 @@
 	"license": "ISC",
 	"author": "cpuabuse.com",
 	"type": "commonjs",
-	"main": "index.js",
-	"types": "index.d.ts",
+	"main": "dist/release/eslint/index.js",
+	"exports": {
+		".": "./dist/release/eslint/index.js",
+		"./base": "./dist/release/eslint/base.js",
+		"./typescript": "./dist/release/eslint/typescript.js",
+		"./vue-tsx": "./dist/release/eslint/vue-tsx.js",
+		"./vue": "./dist/release/eslint/vue.js",
+		"./lib": "./dist/release/eslint/lib/index.js",
+		"./tsdoc": "./dist/release/tsdoc/tsdoc.json"
+	},
+	"types": "dist/release/eslint/index.d.ts",
+	"typesVersions": {
+		"*": {
+			"*": [
+				"dist/release/eslint/index.d.ts"
+			],
+			"base": [
+				"dist/release/eslint/base.d.ts"
+			],
+			"typescript": [
+				"dist/release/eslint/typescript.d.ts"
+			],
+			"vue-tsx": [
+				"dist/release/eslint/vue-tsx.d.ts"
+			],
+			"vue": [
+				"dist/release/eslint/vue.d.ts"
+			],
+			"lib": [
+				"dist/release/eslint/lib/index.d.ts"
+			]
+		}
+	},
 	"directories": {
 		"test": "test"
 	},
 	"files": [
-		"*.js",
-		"lib/*.js"
+		"dist/**/*.js",
+		"dist/**/*.d.ts",
+		"dist/**/*.json"
 	],
 	"scripts": {
-		"build:release": "tsc --project tsconfig/release.tsconfig.json",
+		"build:release": "tsc --project tsconfig/release.eslint.tsconfig.json && ncp src/tsdoc build/release/tsdoc",
 		"build:test": "tsc --project tsconfig/test.tsconfig.json",
+		"build:typedoc": "typedoc",
 		"config:clean": "rimraf dist build",
 		"config:sort": "sort-package-json",
-		"dist:release": "mkdirp dist && ncp build/release ./",
+		"dist:release": "mkdirp dist && ncp build/release dist/release",
 		"exec:test": "mocha build/test/test/test.js",
 		"build": "npm run build:release && npm run dist:release",
 		"test": "npm run build:test && npm run exec:test"
@@ -49,7 +83,6 @@
 		"eslint-config-airbnb-base": "^15.0.0",
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-header": "^3.1.1",
-		"eslint-plugin-import": "^2.25.4",
 		"eslint-plugin-jsdoc": "^37.6.1",
 		"eslint-plugin-mocha": "^10.0.3",
 		"eslint-plugin-prettier": "^4.0.0",
@@ -62,6 +95,9 @@
 		"prettier": "^2.5.1",
 		"rimraf": "^3.0.2",
 		"sort-package-json": "^1.53.1",
+		"typedoc": "^0.23.14",
+		"typedoc-plugin-merge-modules": "^4.0.1",
+		"typedoc-plugin-rename-defaults": "^0.6.4",
 		"typescript": "^4.5.4",
 		"vue-eslint-parser": "^8.0.1"
 	},
@@ -71,8 +107,9 @@
 		"eslint": "^8.7.0",
 		"eslint-config-airbnb-base": "^15.0.0",
 		"eslint-config-prettier": "^8.3.0",
+		"eslint-import-resolver-typescript": "^3.5.1",
 		"eslint-plugin-header": "^3.1.1",
-		"eslint-plugin-import": "^2.25.4",
+		"eslint-plugin-import": "^2.26.0",
 		"eslint-plugin-jsdoc": "^37.6.1",
 		"eslint-plugin-mocha": "^10.0.3",
 		"eslint-plugin-prettier": "^4.0.0",

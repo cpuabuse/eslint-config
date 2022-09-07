@@ -6,15 +6,15 @@
 /**
  * Test file.
  *
- * @module
+ * @file
  */
 
 import { strictEqual } from "assert";
 import { Linter } from "eslint";
-import defaultConfig from "../src/index";
-import vueTypescriptConfig from "../src/typescript";
-import vueConfig from "../src/vue";
-import vueTsxConfig from "../src/vue-tsx";
+import defaultConfig from "../src/eslint/index";
+import vueTypescriptConfig from "../src/eslint/typescript";
+import vueConfig from "../src/eslint/vue";
+import vueTsxConfig from "../src/eslint/vue-tsx";
 
 describe("configs", function () {
 	const configs: Array<{

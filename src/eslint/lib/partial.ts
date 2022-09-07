@@ -158,6 +158,9 @@ export const baseRules: Partial<Linter.RulesRecord> = {
 			"always",
 			{
 				js: "never",
+				json: "ignorePackages",
+				// TS doesn't like `.jsonc` extension
+				jsonc: "ignorePackages",
 				jsx: "never",
 				ts: "never",
 				tsx: "never"
@@ -388,9 +391,8 @@ export const vueRules: Partial<Linter.RulesRecord> = {
  */
 export const secondarySettings: Linter.Config["settings"] = {
 	"import/resolver": {
-		node: {
-			extensions: [".js", ".jsx", ".ts", ".tsx"]
-		}
+		// Uses https://github.com/import-js/eslint-import-resolver-typescript to allow subpath imports; Includes necessary extensions predefined by default - `[".ts", ".tsx", ".d.ts", ".js", ".jsx", ".json", ".node"]`
+		typescript: {}
 	}
 };
 

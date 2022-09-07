@@ -8,6 +8,7 @@
  *
  * @file
  * @module lib
+ * @packageDocumentation
  */
 
 export * from "./regex";
