@@ -56,7 +56,7 @@ This package provides `tsdoc.json` to extend via `tsdoc` entry point.
 
 Notes:
 - In `package.json` this package is using `typesVersions` for types instead of `exports`, since for it to work, `moduleResolution` must be `Node16` in consuming package.
-- Module resolution of TSDoc's `extends` within `tsdoc.json` does not seem to pick up `exports` of `package.json`, so configuration should be extended with "absolute" file path relative to the module: `"extends": ["@cpuabuse/eslint-config/dist/tsdoc/tsdoc.json"]`.
+- Module resolution of TSDoc's `extends` within `tsdoc.json` does not seem to pick up `exports` of `package.json`, so configuration should be extended with "absolute" file path relative to the module: `"extends": ["@cpuabuse/eslint-config/dist/release/tsdoc/tsdoc.json"]`.
 
 ## Development
 

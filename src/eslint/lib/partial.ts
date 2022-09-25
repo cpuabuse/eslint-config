@@ -157,11 +157,16 @@ export const baseRules: Partial<Linter.RulesRecord> = {
 			"error",
 			"always",
 			{
+				cjs: "ignorePackages",
+				css: "ignorePackages",
 				js: "never",
 				json: "ignorePackages",
 				// TS doesn't like `.jsonc` extension
 				jsonc: "ignorePackages",
 				jsx: "never",
+				mjs: "ignorePackages",
+				sass: "ignorePackages",
+				scss: "ignorePackages",
 				ts: "never",
 				tsx: "never"
 			}
