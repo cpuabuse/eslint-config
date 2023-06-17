@@ -1,5 +1,5 @@
 /*
-	Copyright 2022 cpuabuse.com
+	Copyright 2023 cpuabuse.com
 	Licensed under the ISC License (https://opensource.org/licenses/ISC)
 */
 
@@ -21,6 +21,11 @@ const backtick: string = "`";
 const numbers: string = "\\d";
 
 /**
+ * All regex characters.
+ */
+const allCharacters: string = `[\\s\\S]`;
+
+/**
  * First letter in English sentences, that are not used for Markdown.
  */
 const englishFirstCharacter: string = `A-Z${backtick}"'{`;
@@ -40,14 +45,30 @@ const firstLineSentence: string = `[${englishFirstCharacter}${numbers}].*([^.])`
  */
 const paragraphs: Record<string, string> = {
 	// Represents a paragraph that is a markdown codeblock.
-	code: "(```.*\\n((?!```).+\\n(\\n?|(?=```)))+```)(\\n{2}(?=.)|(?=$))",
+	code: "(```.*\\n((?!```).+\\n(\\n?|(?=```)))+```)",
+
 	// Represents a paragraph in English.
-	english: `([${englishFirstCharacter}][${englishMiddleCharacters}]*[.]\\n)*[${englishFirstCharacter}][${englishMiddleCharacters}]*[.](\\n{2}(?=.)|(?=$))`,
-	// Represents a paragraph with special characters as the first symbol.
-	specialBeginning: `(.+\\n)*[^${englishFirstCharacter}a-z\\n].*((\\n.+)*\\n{2}(?=.)|(\\n.+)*(?=$))`,
-	// Represents a paragraph with special characters as the middle or last symbol.
-	specialRest: `(.+\\n)*.*[^${englishMiddleCharacters}\\n].*((\\n.+)*\\n{2}(?=.)|(\\n.+)*(?=$))`
+	english: `[${englishFirstCharacter}][${englishMiddleCharacters}]*[.]`
 };
+
+/**
+ * Represents a paragraph.
+ */
+const paragraphCapture: string = `(${Object.values(paragraphs).join("|")})`;
+
+/**
+ * Represents a sequence with special characters as the first symbol.
+ *
+ * @remarks
+ * - `^\n` is also there, to avoid triggering on empty lines
+ * - `a-z` to not ignore potential mistake of starting sentence from small letter
+ */
+const specialBeginningSequence: string = `[^${englishFirstCharacter}a-z\\n]${allCharacters}*`;
+
+/**
+ * Represents a sequence with special characters as the middle or last symbol.
+ */
+const specialRestSequence: string = `[${allCharacters}*[^${englishMiddleCharacters}.\\n]${allCharacters}*`;
 
 /**
  * Regular expression for long comments.
@@ -57,15 +78,20 @@ const paragraphs: Record<string, string> = {
  * - Paragraph, containing Markdown characters
  * - Paragraph, starting with a character, that could identify Markdown
  * - Code block
+ *
+ * @remarks
+ * Have to accomodate for trailing `\n` after description followed by tag.
  */
-export const blockTagRegex: string = `^(${Object.values(paragraphs).join("|")})+$`;
+export const blockTagRegex: string = `^(${paragraphCapture}\\n)*${paragraphCapture}\\n?$|^${specialBeginningSequence}$|^${allCharacters}*\\n${specialBeginningSequence}$|^${specialRestSequence}$`;
 
 /**
  * Regular expression for block tag with first line optional.
  *
  * Identifies {@link blockTagRegex | block sentences}, optionally preceded by {@link firstLineTagRegex | first line sentence}, for example title in `example` tag.
  */
-export const blockFirstLineTagRegex: string = `^(${firstLineSentence}\n)?(${Object.values(paragraphs).join("|")})+$`;
+export const blockFirstLineTagRegex: string = `^(${firstLineSentence})?(\\n(${Object.values(paragraphs).join(
+	"|"
+)})+)?$`;
 
 /**
  * Regular expression for short comments.

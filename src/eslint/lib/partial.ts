@@ -1,5 +1,5 @@
 /*
-	Copyright 2022 cpuabuse.com
+	Copyright 2023 cpuabuse.com
 	Licensed under the ISC License (https://opensource.org/licenses/ISC)
 */
 
@@ -141,7 +141,7 @@ export const baseRules: Partial<Linter.RulesRecord> = {
 		// Ensure that files begin with given comment
 		// Properly add licenses
 		"header/header": [
-			"error",
+			"warn",
 			"block",
 			[
 				"",
@@ -270,7 +270,8 @@ export const baseRules: Partial<Linter.RulesRecord> = {
 			"error",
 			"never",
 			{
-				noEndLines: true,
+				applyToEndTag: false,
+				startLines: 1,
 				tags: {
 					example: { lines: "always" }, // Block tag
 					remarks: { lines: "always" }, // Block tag
