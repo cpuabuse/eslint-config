@@ -80,9 +80,9 @@ const specialRestSequence: string = `[${allCharacters}*[^${englishMiddleCharacte
  * - Code block
  *
  * @remarks
- * Have to accomodate for trailing `\n` after description followed by tag.
+ * Have to accomodate for trailing `\n` after description followed by tag. For cases when there is no tag, rule will produce false positive, but only way to avoid it would be either AST scope setting or more complex RegEx.
  */
-export const blockTagRegex: string = `^(${paragraphCapture}\\n)*${paragraphCapture}\\n?$|^${specialBeginningSequence}$|^${allCharacters}*\\n${specialBeginningSequence}$|^${specialRestSequence}$`;
+export const blockTagRegex: string = `^(${paragraphCapture}\\n\\n?)*${paragraphCapture}\\n?$|^${specialBeginningSequence}$|^${allCharacters}*\\n${specialBeginningSequence}$|^${specialRestSequence}$`;
 
 /**
  * Regular expression for block tag with first line optional.
