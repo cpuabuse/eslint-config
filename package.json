@@ -31,6 +31,9 @@
 		"./lib": "./dist/release/eslint/lib/index.js",
 		"./tsdoc": "./dist/release/tsdoc/tsdoc.json"
 	},
+	"engines": {
+		"node": ">=14"
+	},
 	"types": "dist/release/eslint/index.d.ts",
 	"typesVersions": {
 		"*": {
