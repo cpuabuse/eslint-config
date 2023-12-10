@@ -4,14 +4,13 @@
 */
 
 /**
- * Reusable config bits.
- *
  * @file
+ * Reusable config bits.
  * @module lib
  */
 
 import { Linter } from "eslint";
-import { blockFirstLineTagRegex, blockTagRegex, firstLineTagRegex } from ".";
+import { blockFirstLineTagRegex, blockOneLineRegex, blockTagRegex, inlineTagRegex } from ".";
 
 /**
  * Asts to use for documentation.
@@ -206,16 +205,29 @@ export const baseRules: Partial<Linter.RulesRecord> = {
 		"jsdoc/match-description": [
 			"error",
 			{
-				contexts: ["any"],
+				// Removed extra css uniting tags: https://github.com/gajus/eslint-plugin-jsdoc/issues/847#issuecomment-1068594852
+				contexts: [{ comment: "JsdocBlock[endLine!=0]" }],
 				matchDescription: blockTagRegex,
 				tags: {
 					example: { match: blockFirstLineTagRegex },
-					param: { match: firstLineTagRegex },
+					param: { match: inlineTagRegex },
 					remarks: { match: true },
-					returns: { match: firstLineTagRegex },
-					see: { match: firstLineTagRegex },
+					returns: { match: inlineTagRegex },
+					see: { match: inlineTagRegex },
 					throws: { match: blockFirstLineTagRegex }
 				}
+			}
+		],
+
+		"jsdoc/no-restricted-syntax": [
+			"error",
+			{
+				contexts: [
+					{
+						// https://github.com/gajus/eslint-plugin-jsdoc/issues/847#issuecomment-1068579604
+						comment: `JsdocBlock[endLine=0][description!=/${blockOneLineRegex}/]`
+					}
+				]
 			}
 		],
 
