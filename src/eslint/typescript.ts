@@ -1,5 +1,5 @@
 /*
-	Copyright 2022 cpuabuse.com
+	Copyright 2024 cpuabuse.com
 	Licensed under the ISC License (https://opensource.org/licenses/ISC)
 */
 
@@ -31,7 +31,9 @@ const typescriptConfig: Linter.Config = {
 	extends: ["./base.js", ...typeExtends, ...secondaryExtends],
 	parser: "@typescript-eslint/parser",
 	parserOptions: {
-		project: "./tsconfig.json"
+		// Path from node modules
+		project: "../../../../../../tsconfig.json",
+		tsconfigRootDir: __dirname
 	},
 	rules: { ...baseRules, ...secondaryRules },
 	settings: secondarySettings

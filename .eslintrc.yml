@@ -1,1 +1,3 @@
 extends: ./build/release/eslint/index.js
+parserOptions:
+  project: ../../../tsconfig.json

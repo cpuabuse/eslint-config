@@ -36,6 +36,8 @@ Used by default config for TypeScript files, `.eslintrc.yml` should contain the 
 extends: "@cpuabuse/eslint-config/typescript"
 ```
 
+If setting `parserOptions`' `project`, it should be set relative to this package's `dist/release/eslint/typescript.js`, unless `tsconfigRootDir` is also provided. If installed in `node_modules` it defaults to `tsconfig.json` in folder, containing `node_modules`.
+
 ##### `vue`
 
 Rules for Vue, `.eslintrc.yml` should contain the following:
@@ -66,8 +68,16 @@ Top level configs go into `src` folder, while anything else must reside inside `
 
 #### `release`
 
+```
+npm run build
+```
+
 Config files are put into the package root, so that ESLint can consume additional configs, as it resolves their path relative to root, not the entrypoint.
 
 #### `test`
+
+```
+npm run test
+```
 
 Validates exported config structure with Mocha.

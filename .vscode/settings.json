@@ -13,5 +13,8 @@
 			"url": "https://json.schemastore.org/tsconfig"
 		}
 	],
-	"eslint.probe": ["typescript", "html", "vue"]
+	"eslint.probe": ["typescript", "html", "vue"],
+	"eslint.rules.customizations": [{
+		"rule": "header/header", "severity": "off"
+	}]
 }

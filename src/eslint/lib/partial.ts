@@ -1,5 +1,5 @@
 /*
-	Copyright 2023 cpuabuse.com
+	Copyright 2024 cpuabuse.com
 	Licensed under the ISC License (https://opensource.org/licenses/ISC)
 */
 
@@ -16,7 +16,7 @@ import { blockFirstLineTagRegex, blockOneLineRegex, blockTagRegex, inlineTagRege
  * Asts to use for documentation.
  */
 const DocAstContext: Array<string> = [
-	"ClassProperty",
+	"PropertyDefinition", // Class members
 	"TSPropertySignature", // For interfaces
 	"TSMethodSignature", // For interfaces
 	"TSTypeAliasDeclaration",
@@ -59,6 +59,12 @@ export const vueExtends: Array<string> = ["plugin:vue/vue3-recommended"];
 
 /**
  * Rules that go everywhere. It includes rules from typescript typechecking as well, since it is difficult to distinguish origin.
+ *
+ * @remarks
+ * - `@typescript-eslint/typedef` is to be governed by `noImplicitAny`
+ * - `jsdoc/require-description` not needed due to `jsdoc/match-description`
+ * - It is harder to check termination character for normal comments, but at least can check capitalization with `capitalized-comments`
+ * - `@typescript-eslint/no-dupe-class-members` is not needed due to TS checking
  *
  * @see {@link DocAstContext}
  */
@@ -107,9 +113,9 @@ export const baseRules: Partial<Linter.RulesRecord> = {
 		// We want to use array constructor often
 		"@typescript-eslint/no-array-constructor": "off",
 
-		// Disallow duplicate class members
-		// Fixes no-dupe-class-members
-		"@typescript-eslint/no-dupe-class-members": ["error"],
+		// Disallow empty functions
+		// Ensure WIP code filled
+		"@typescript-eslint/no-empty-function": "error",
 
 		// Disallow usage of the any type
 		// That is why any can only be explicit
@@ -119,19 +125,9 @@ export const baseRules: Partial<Linter.RulesRecord> = {
 		// We want the types to be forced
 		"@typescript-eslint/no-inferrable-types": "off",
 
-		// Requires type definitions to exist
-		// We want all types. Seems many options off by default now
-		"@typescript-eslint/typedef": [
-			"error",
-			{
-				arrayDestructuring: true,
-				memberVariableDeclaration: true,
-				objectDestructuring: true,
-				parameter: true,
-				propertyDeclaration: true,
-				variableDeclaration: true
-			}
-		],
+		// Enforce or disallow capitalization of the first letter of a comment
+		// Follow styling
+		"capitalized-comments": ["error", "always"],
 
 		// Require or disallow named function expressions
 		// Creates too much clutter
@@ -196,7 +192,7 @@ export const baseRules: Partial<Linter.RulesRecord> = {
 		// Allow destructured to be ignored and be documented
 		"jsdoc/check-param-names": "off",
 
-		// Reports invalid block tag names.
+		// Reports invalid block tag names
 		// Do not need to replace TSDoc comments
 		"jsdoc/check-tag-names": "off",
 
@@ -205,7 +201,10 @@ export const baseRules: Partial<Linter.RulesRecord> = {
 		"jsdoc/match-description": [
 			"error",
 			{
-				// Removed extra css uniting tags: https://github.com/gajus/eslint-plugin-jsdoc/issues/847#issuecomment-1068594852
+				/*
+					Exclude zero line comments - https://github.com/gajus/eslint-plugin-jsdoc/issues/847#issuecomment-1068594852
+					One line comment format matches multiline, for the documentation output to match.
+				*/
 				contexts: [{ comment: "JsdocBlock[endLine!=0]" }],
 				matchDescription: blockTagRegex,
 				tags: {
@@ -219,24 +218,17 @@ export const baseRules: Partial<Linter.RulesRecord> = {
 			}
 		],
 
+		// Enforces a regular expression pattern on descriptions
+		// Reports when certain comment structures are present
 		"jsdoc/no-restricted-syntax": [
 			"error",
 			{
 				contexts: [
 					{
-						// https://github.com/gajus/eslint-plugin-jsdoc/issues/847#issuecomment-1068579604
+						// Process zero line comments - https://github.com/gajus/eslint-plugin-jsdoc/issues/847#issuecomment-1068579604
 						comment: `JsdocBlock[endLine=0][description!=/${blockOneLineRegex}/]`
 					}
 				]
-			}
-		],
-
-		// Requires that all functions have a description
-		// Not included into default
-		"jsdoc/require-description": [
-			"error",
-			{
-				contexts: DocAstContext
 			}
 		],
 
@@ -275,6 +267,10 @@ export const baseRules: Partial<Linter.RulesRecord> = {
 		// Requires that @returns tag has type value
 		// Not needed for TS
 		"jsdoc/require-returns-type": "off",
+
+		// Requires that throw statements are documented
+		// Richer TSDoc
+		"jsdoc/require-throws": ["error"],
 
 		// Enforces lines (or no lines) between tags
 		// Default behavior removes desired lines
@@ -318,7 +314,7 @@ export const baseRules: Partial<Linter.RulesRecord> = {
 		"no-magic-numbers": [
 			"error",
 			{
-				ignore: [0, 1, -1]
+				ignore: [-2, -1, 0, 1, 2]
 			}
 		],
 
